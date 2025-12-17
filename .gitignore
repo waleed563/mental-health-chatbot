@@ -1,0 +1,13 @@
+# Virtual environments
+backend/venv/
+backend/.venv/
+.venv/
+venv/
+
+# Python cache and build artifacts
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Django local database
+backend/db.sqlite3
