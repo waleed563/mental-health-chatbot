@@ -104,9 +104,10 @@ if os.environ.get('RAILWAY_ENVIRONMENT'):
     STATICFILES_DIRS = []
 else:
     # Development - include frontend static files
-    STATICFILES_DIRS = [
-        BASE_DIR.parent / 'frontend' / 'static',
-    ]
+    #STATICFILES_DIRS = [
+    #    BASE_DIR.parent / 'frontend' / 'static',
+    #]
+    pass
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Media files
