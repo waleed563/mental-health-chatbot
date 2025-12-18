@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-your-secret-key-change-this-in-production'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     'mental-health-chatbot-production-3443.up.railway.app',
@@ -53,7 +53,10 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR.parent / 'frontend' / 'templates'],  # Updated
+        'DIRS': [
+            BASE_DIR.parent / 'frontend' / 'templates',  # For local development
+            BASE_DIR / 'templates',  # For production (if we copy templates here)
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,8 +108,9 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Check if we're in production (Railway)
 if os.environ.get('RAILWAY_ENVIRONMENT'):
     # Production - frontend files might not be in the same location
-    STATICFILES_DIRS = []
-else:
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',  # Where we copied frontend static files
+]else:
     # Development - include frontend static files
     #STATICFILES_DIRS = [
     #    BASE_DIR.parent / 'frontend' / 'static',
