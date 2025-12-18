@@ -11,8 +11,12 @@ SECRET_KEY = 'django-insecure-your-secret-key-change-this-in-production'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = [
+    'mental-health-chatbot-production-3443.up.railway.app',
+    '.railway.app',
+    'localhost',
+    '127.0.0.1',
+]
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -152,3 +156,7 @@ AUTH_USER_MODEL = 'accounts.User'
 
 # N8N Webhook URL (we'll update this later when N8N is ready)
 N8N_WEBHOOK_URL = 'https://waleedahmedpti.app.n8n.cloud/webhook/mental-health'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://mental-health-chatbot-production-3443.up.railway.app',
+]
