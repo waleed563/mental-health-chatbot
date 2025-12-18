@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 from datetime import timedelta
 
@@ -93,13 +94,21 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
+# Static files
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-    BASE_DIR.parent / 'frontend' / 'static',
-]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# Check if we're in production (Railway)
+if os.environ.get('RAILWAY_ENVIRONMENT'):
+    # Production - frontend files might not be in the same location
+    STATICFILES_DIRS = []
+else:
+    # Development - include frontend static files
+    STATICFILES_DIRS = [
+        BASE_DIR.parent / 'frontend' / 'static',
+    ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
