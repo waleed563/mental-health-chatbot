@@ -105,17 +105,15 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# Check if we're in production (Railway)
+# STATICFILES_DIRS - different for production and development
 if os.environ.get('RAILWAY_ENVIRONMENT'):
-    # Production - frontend files might not be in the same location
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # Where we copied frontend static files
-]else:
-    # Development - include frontend static files
-    #STATICFILES_DIRS = [
-    #    BASE_DIR.parent / 'frontend' / 'static',
-    #]
-    pass
+    # Production - frontend files copied to backend/static
+    STATICFILES_DIRS = [
+        BASE_DIR / 'static',
+    ]
+else:
+    # Development - reference frontend folder
+    STATICFILES_DIRS = []
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Media files
